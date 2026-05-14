@@ -2,9 +2,9 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>АНО «Возвращение» — полная модель | Адаптивный документ</title>
-    <!-- Chart.js CDN -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>АНО «Правда. Возвращение. Опора» (ПВО) — проект</title>
+    <!-- Chart.js CDN for graphs -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <style>
         * {
@@ -14,471 +14,461 @@
         }
 
         body {
-            background: #f0f2f0;
-            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-            padding: 16px;
-            color: #1a2e2a;
-            line-height: 1.45;
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: #f0f2f5;
+            color: #1a2c3e;
+            padding: 2rem 1rem;
+            line-height: 1.5;
         }
 
-        /* основной контейнер — резиновый */
-        .doc {
-            max-width: 1400px;
+        .container {
+            max-width: 1300px;
             margin: 0 auto;
             background: white;
-            border-radius: 28px;
-            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.05);
-            padding: 24px 20px;
-            transition: all 0.2s ease;
+            border-radius: 32px;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            padding: 2rem 1.8rem;
         }
 
-        /* заголовки */
         h1 {
-            font-size: clamp(1.8rem, 6vw, 2.4rem);
-            font-weight: 700;
-            background: linear-gradient(135deg, #2c5f2d, #8b5a2b);
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #1e3c72, #2b4c7c);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            letter-spacing: -0.3px;
             margin-bottom: 0.25rem;
-            letter-spacing: -0.01em;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #eef2ff;
+            color: #1e3c72;
+            font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
         }
 
         .sub {
-            color: #5a6e5a;
-            margin-bottom: 1.5rem;
-            border-left: 3px solid #cfb284;
+            color: #4a627a;
+            border-left: 4px solid #2b4c7c;
             padding-left: 1rem;
-            font-size: clamp(0.9rem, 4vw, 1.05rem);
+            margin: 0.75rem 0 1.5rem 0;
+            font-weight: 400;
         }
 
-        h2 {
-            font-size: clamp(1.3rem, 5vw, 1.8rem);
-            margin-top: 1.8rem;
-            margin-bottom: 0.8rem;
-            padding-bottom: 0.4rem;
-            border-bottom: 3px solid #cfb284;
-            color: #2c5f2d;
-        }
-
-        h3 {
-            font-size: clamp(1.1rem, 4.5vw, 1.35rem);
-            margin: 1.2rem 0 0.6rem;
-            color: #6b4e3a;
-            font-weight: 600;
-        }
-
-        /* сетки и карточки — адаптив */
         .grid-2 {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.2rem;
-            margin: 1rem 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.8rem;
+            margin: 2rem 0;
         }
 
         .card {
-            flex: 1 1 280px;
-            background: #fefaf5;
-            border: 1px solid #e2d9cf;
-            border-radius: 20px;
-            padding: 1.2rem;
-            transition: 0.1s linear;
+            background: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            border: 1px solid #e9edf2;
+            transition: all 0.2s;
         }
 
-        /* таблицы — горизонтальный скролл на мобильных */
-        .table-wrapper {
-            width: 100%;
-            overflow-x: auto;
-            margin: 1rem 0;
-            border-radius: 16px;
+        .card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card h4 {
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin: 1rem 0 0.5rem 0;
+            color: #1e3c72;
         }
 
         table {
             width: 100%;
-            min-width: 500px;
             border-collapse: collapse;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
+            margin: 1rem 0;
         }
 
         th, td {
-            border: 1px solid #ccc;
-            padding: 8px 10px;
             text-align: left;
-            vertical-align: top;
+            padding: 0.6rem 0.4rem;
+            border-bottom: 1px solid #e2e8f0;
         }
 
         th {
-            background: #ede5d6;
             font-weight: 700;
+            background-color: #f8fafc;
         }
 
-        /* адаптивные блоки */
-        .highlight {
-            background: #fef2e0;
-            padding: 0.9rem 1.2rem;
-            border-left: 5px solid #cfb284;
-            border-radius: 18px;
+        .financial-summary {
+            background: #f8fafc;
+            border-radius: 24px;
+            padding: 1.5rem;
             margin: 1rem 0;
-            font-size: clamp(0.85rem, 3.5vw, 0.95rem);
         }
 
-        .profit-badge {
-            background: #e1f3e1;
-            padding: 0.5rem 1rem;
-            border-radius: 40px;
-            font-weight: 700;
-            display: inline-block;
-            margin: 0.5rem 0;
-            font-size: clamp(0.8rem, 3vw, 0.9rem);
-        }
-
-        /* графика — адаптивная ширина */
-        .flex-charts {
+        .flex-stats {
             display: flex;
             flex-wrap: wrap;
-            gap: 2rem;
-            justify-content: center;
+            gap: 1.5rem;
+            justify-content: space-between;
             margin: 1.5rem 0;
         }
 
+        .stat-card {
+            flex: 1;
+            background: white;
+            border-radius: 20px;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+            border: 1px solid #eef2f6;
+        }
+
+        .stat-number {
+            font-size: 1.9rem;
+            font-weight: 800;
+            color: #1e4663;
+        }
+
+        hr {
+            margin: 1.5rem 0;
+            border: none;
+            height: 2px;
+            background: linear-gradient(to right, #cbd5e1, transparent);
+        }
+
         .chart-container {
-            flex: 1 1 320px;
-            max-width: 500px;
-            min-width: 260px;
-            background: #ffffff;
-            padding: 0.5rem;
+            position: relative;
+            height: 280px;
+            margin: 1.5rem 0;
         }
 
-        canvas {
-            max-width: 100%;
-            height: auto;
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
         }
 
-        /* списки */
-        ul, .checklist {
-            margin: 0.75rem 0 0.75rem 1.4rem;
+        .timeline-item {
+            display: flex;
+            gap: 1rem;
+            border-left: 3px solid #2b4c7c;
+            padding-left: 1rem;
         }
 
-        li {
-            margin: 0.4rem 0;
-            font-size: clamp(0.85rem, 3.5vw, 0.95rem);
+        .month {
+            font-weight: 800;
+            min-width: 70px;
+            color: #0f2b42;
         }
 
         footer {
-            margin-top: 2rem;
-            font-size: 0.7rem;
-            color: #8f7a63;
             text-align: center;
-            border-top: 1px solid #e2d9cf;
-            padding-top: 1.2rem;
+            margin-top: 2.5rem;
+            font-size: 0.8rem;
+            color: #6c86a3;
+            border-top: 1px solid #e2edf7;
+            padding-top: 1.8rem;
         }
 
-        /* улучшенная читаемость на планшетах */
-        @media (min-width: 768px) {
-            body {
-                padding: 32px 24px;
-            }
-            .doc {
-                padding: 36px 44px;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .doc {
-                padding: 18px 14px;
-            }
-            th, td {
-                padding: 6px 8px;
-                font-size: 0.75rem;
+        @media (max-width: 700px) {
+            .container {
+                padding: 1rem;
             }
             .card {
-                padding: 0.9rem;
+                padding: 1rem;
             }
-        }
-
-        /* печать */
-        @media print {
-            body {
-                background: white;
-                padding: 0;
-                margin: 0;
-            }
-            .doc {
-                max-width: 100%;
-                padding: 0.5in;
-                box-shadow: none;
-                border-radius: 0;
-            }
-            .table-wrapper {
-                overflow: visible;
-            }
-            .flex-charts {
-                break-inside: avoid;
+            h1 {
+                font-size: 1.7rem;
             }
         }
     </style>
 </head>
 <body>
-<div class="doc">
-    <h1>⚡ АНО «Возвращение»</h1>
-    <div class="sub">Полная адаптивная модель: управление | Сетевое СМИ | Кибербезопасность | Мастерская | бизнес-расчёт и тендеры</div>
+<div class="container">
+    <div class="badge">⚡ полная проектная модель | версия 2.0</div>
+    <h1>АНО «Правда. Возвращение. Опора»</h1>
+    <div class="sub">Короткое наименование: АНО «ПВО» | СМИ «Правда.Возвращение» | Мастерская «ПВО-Мастерская»</div>
 
-    <!-- ========== 1. Управление ========= -->
-    <h2>1. Органы управления АНО</h2>
-    <div class="table-wrapper">
+    <!-- краткое описание -->
+    <div class="financial-summary" style="margin-top: 0;">
+        <strong>🎯 Миссия:</strong> через честную журналистику и труд возвращать ветеранов к мирной жизни, давая им опору — информационную, социальную, профессиональную. <br>
+        <strong>⚙️ Ключевые направления:</strong> Сетевое издание + производственная мастерская. Кибербезопасность — в планах развития (2-й год).
+    </div>
+
+    <!-- 1. Управление -->
+    <div class="card">
+        <h3>🏛️ Органы управления АНО</h3>
         <table>
-            <thead><tr><th>Орган</th><th>Состав</th><th>Ключевые полномочия</th></tr></thead>
+            <thead>
+                <tr><th>Орган</th><th>Состав</th><th>Ключевые полномочия</th></tr>
+            </thead>
             <tbody>
-                <tr><td><strong>Учредители</strong></td><td>3–5 физ. лиц</td><td>Утверждение устава, назначение директора, ликвидация</td></tr>
-                <tr><td><strong>Директор</strong></td><td>1 (наёмный)</td><td>Операционное управление, финансы, гранты, договоры</td></tr>
-                <tr><td><strong>Попечительский совет</strong></td><td>3–7 человек (бизнес, ветераны, юристы, медиа)</td><td>Контроль, фандрайзинг, стратегия, связи</td></tr>
-                <tr><td><strong>Ревизор</strong></td><td>1 (независимый)</td><td>Проверка финансовой отчётности</td></tr>
+                <tr><td>Учредители</td><td>3 физ. лица</td><td>Утверждение устава, назначение директора</td></tr>
+                <tr><td>Директор</td><td>1 (наёмный)</td><td>Операционка, финансы, гранты, договоры</td></tr>
+                <tr><td>Попечительский совет</td><td>3–5 человек (ветераны, юристы, СМИ)</td><td>Стратегия, фандрайзинг, контроль</td></tr>
+                <tr><td>Ревизор</td><td>1 (независимый)</td><td>Проверка отчётности</td></tr>
             </tbody>
         </table>
-    </div>
-    <div class="highlight">
-        🔹 <strong>Попечительский совет:</strong> формируется учредителями. Заседания не реже 1 раза в квартал. Согласование крупных сделок (аренда >100 тыс. руб./мес) и грантов >2 млн руб. Члены совета работают pro bono.
+        <div style="font-size: 0.85rem; color: #3b5e7e;">Заседания поквартально, члены совета pro bono.</div>
     </div>
 
-    <!-- ========== 2. СМИ ========= -->
-    <h2>2. Сетевое издание «Возвращение.Медиа»</h2>
+    <!-- 2. СМИ + Мастерская основные блоки -->
     <div class="grid-2">
         <div class="card">
-            <strong>📌 Регистрация в РКН</strong><br>
-            ➜ Подача через Госуслуги (услуга «Регистрация СМИ»)<br>
-            ➜ Пошлина ≈10 000 ₽, срок 15 рабочих дней<br>
-            ➜ Выписка из реестра вместо свидетельства
+            <h3>📰 Сетевое издание «Правда.Возвращение»</h3>
+            <p><strong>Регистрация:</strong> РКН (Госуслуги, пошлина ~10 000₽, 15 рабочих дней)<br>
+            <strong>Тематика:</strong> соцжурналистика, адаптация ветеранов, юрсоветы, патриотика.<br>
+            <strong>Периодичность:</strong> ежедневно + еженедельный аналитический выпуск.</p>
+            <h4>📌 Монетизация СМИ (год)</h4>
+            <table>
+                <tr><th>Канал</th><th>Выручка (тыс. ₽)</th></tr>
+                <tr><td>Госсубсидии / гранты (социалка)</td><td>900</td></tr>
+                <tr><td>Тендеры по 44-ФЗ / инфосопровождение</td><td>300</td></tr>
+                <tr><td>Добровольные пожертвования</td><td>250</td></tr>
+                <tr><td>Платная подписка (100 чел × 300₽×12)</td><td>360</td></tr>
+                <tr><td>Обучение военной журналистике (поток)</td><td>150</td></tr>
+                <tr><td><strong>Итого СМИ</strong></td><td><strong>1 960</strong></td></tr>
+            </table>
+            <p><em>Прямые расходы редакции: ФОТ журналист+гл.ред, продвижение ≈ 960 тыс.₽, вклад в прибыль ~1 000 тыс.₽</em></p>
         </div>
+
         <div class="card">
-            <strong>✍️ Редакция на базе АНО</strong><br>
-            ➜ Главный редактор – официальный представитель<br>
-            ➜ Военные корреспонденты (внештат / волонтёры)<br>
-            ➜ ОКВЭД 63.91 в уставе АНО
-        </div>
-    </div>
-    <p><strong>Тематика:</strong> аналитика, истории реабилитации ветеранов, социальная журналистика, юридические советы.<br>
-    <strong>Территория:</strong> РФ и страны СНГ. <strong>Периодичность:</strong> ежедневные новости + еженедельные аналитические выпуски.</p>
-
-    <!-- ========== 3. Кибербезопасность ========= -->
-    <h2>3. Кибербезопасность, модерация и правовой мониторинг</h2>
-    <div class="table-wrapper">
-        <table>
-            <thead><tr><th>Функция / Роль</th><th>Обязанности</th><th>Ответственный</th><th>Правовая база</th></tr></thead>
-            <tbody>
-                <tr><td><strong>Администратор ИБ</strong></td><td>Антивирусы, шифрование, двухфакторка, защита от взлома</td><td>Штат (0,5 ставки) или аутсорс</td><td>152-ФЗ, приказы ФСТЭК</td></tr>
-                <tr><td><strong>Модератор соцсетей и контента</strong></td><td>Предмодерация, проверка на экстремизм/оскорбления/фейки</td><td>Штат (1 ставка)</td><td>149-ФЗ ст.10.6, 436-ФЗ</td></tr>
-                <tr><td><strong>Юрист по информационному праву</strong></td><td>Аудит статей, досудебные урегулирования, ответы на запросы РКН</td><td>Внештат (договор)</td><td>149-ФЗ, 212-ФЗ</td></tr>
-                <tr><td><strong>Система мониторинга упоминаний</strong></td><td>Автоматический поиск угроз, клеветы, призывов к насилию</td><td>ПО (лицензия)</td><td>Рекомендации РКН</td></tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="highlight">
-        🛡️ <strong>Правила модерации:</strong> запрещены экстремизм, угрозы, разжигание розни, фейки. Время реакции на нарушение – до 2 часов.
-    </div>
-
-    <!-- ========== 4. Бизнес-расчёт ========= -->
-    <h2>4. Бизнес-расчёт и доходность подразделений</h2>
-
-    <h3>🔐 Кибербезопасность и мониторинг</h3>
-    <div class="table-wrapper">
-        <table>
-            <thead><tr><th>Услуга</th><th>Кол-во заказов/год</th><th>Средний чек (₽)</th><th>Выручка (₽)</th></tr></thead>
-            <tbody>
-                <tr><td>Аудит соцсетей / публикаций</td><td>8</td><td>90 000</td><td>720 000</td></tr>
-                <tr><td>Абонементы мониторинга (10 клиентов × 10 мес)</td><td>10</td><td>25 000</td><td>2 500 000</td></tr>
-                <tr><td>Сопровождение ответов в РКН</td><td>15</td><td>20 000</td><td>300 000</td></tr>
-                <tr><td>Обучение сотрудников (4 группы)</td><td>4</td><td>60 000</td><td>240 000</td></tr>
-                <tr><td>Техническая защита ПДн</td><td>3</td><td>60 000</td><td>180 000</td></tr>
-                <tr><td><strong>Итого выручка</strong></td><td colspan="2"></td><td><strong>3 940 000 ₽</strong></td></tr>
-            </tbody>
-        </table>
-    </div>
-    <p><strong>Прямые расходы (год):</strong> ФОТ (админ ИБ + юрист) – 1 100 000 ₽, лицензии – 60 000 ₽, хостинг/VPN – 40 000 ₽ → <strong>Итого 1 200 000 ₽</strong></p>
-    <div class="profit-badge">💰 Прибыль: 2 740 000 ₽/год | Рентабельность ≈70%</div>
-
-    <h3>📰 СМИ (сетевое издание)</h3>
-    <div class="table-wrapper">
-        <table>
-            <thead><tr><th>Канал монетизации</th><th>Выручка (₽/год)</th></tr></thead>
-            <tbody>
-                <tr><td>Госсубсидия / гранты (социальная журналистика)</td><td>3 200 000</td></tr>
-                <tr><td>Тендеры по 44-ФЗ / 223-ФЗ (инфосопровождение)</td><td>1 500 000</td></tr>
-                <tr><td>Добровольные пожертвования</td><td>300 000</td></tr>
-                <tr><td>Платная подписка (100 чел × 300 ₽ × 12)</td><td>360 000</td></tr>
-                <tr><td>Обучение военной журналистике (2 потока)</td><td>450 000</td></tr>
-                <tr><td><strong>Итого выручка</strong></td><td><strong>5 810 000 ₽</strong></td></tr>
-            </tbody>
-        </table>
-    </div>
-    <p><strong>Прямые расходы (год):</strong> гонорарный фонд – 1 800 000 ₽, продвижение – 400 000 ₽, ПО/хостинг – 200 000 ₽ → <strong>Итого 2 400 000 ₽</strong></p>
-    <div class="profit-badge">💰 Прибыль: 3 410 000 ₽/год | Рентабельность ≈59%</div>
-
-    <h3>🛠️ Мастерская (столярка, 3D, ремонт)</h3>
-    <div class="table-wrapper">
-        <table>
-            <thead><tr><th>Продукт / услуга</th><th>Кол-во</th><th>Цена (₽)</th><th>Выручка (₽)</th></tr></thead>
-            <tbody>
-                <tr><td>Мебель на заказ</td><td>60 шт</td><td>15 000</td><td>900 000</td></tr>
-                <tr><td>Сувениры для юрлиц</td><td>1000 шт</td><td>300</td><td>300 000</td></tr>
-                <tr><td>Ремонт техники</td><td>150 шт</td><td>2 000</td><td>300 000</td></tr>
-                <tr><td>Мастер-классы</td><td>200 чел</td><td>3 000</td><td>600 000</td></tr>
-                <tr><td><strong>Итого</strong></td><td colspan="2"></td><td><strong>2 100 000 ₽</strong></td></tr>
-            </tbody>
-        </table>
-    </div>
-    <p>Расходы (материалы, амортизация): 600 000 ₽/год</p>
-    <div class="profit-badge">💰 Прибыль: 1 500 000 ₽/год | Рентабельность ≈71%</div>
-
-    <!-- ========== 5. Сводка ========= -->
-    <h2>5. Сводная таблица доходности (тыс. ₽)</h2>
-    <div class="table-wrapper">
-        <table>
-            <thead><tr><th>Подразделение</th><th>Выручка</th><th>Прямые расходы</th><th>Вклад в прибыль</th><th>Рентабельность</th></tr></thead>
-            <tbody>
-                <tr><td>Кибербезопасность</td><td>3 940</td><td>1 200</td><td>2 740</td><td>70%</td></tr>
-                <tr><td>СМИ</td><td>5 810</td><td>2 400</td><td>3 410</td><td>59%</td></tr>
-                <tr><td>Мастерская</td><td>2 100</td><td>600</td><td>1 500</td><td>71%</td></tr>
-                <tr><td><strong>ИТОГО</strong></td><td><strong>11 850</strong></td><td><strong>4 200</strong></td><td><strong>7 650</strong></td><td>—</td></tr>
-            </tbody>
-        </table>
-    </div>
-
-    <!-- ========== 6. Графики ========= -->
-    <h2>6. Финансовые графики</h2>
-    <div class="flex-charts">
-        <div class="chart-container">
-            <canvas id="incomeChart" width="450" height="300" style="width:100%; height:auto; max-width:450px; margin:0 auto;"></canvas>
-            <p style="text-align: center; font-size: 0.8rem;">📊 Выручка подразделений (тыс. ₽)</p>
-        </div>
-        <div class="chart-container">
-            <canvas id="profitChart" width="450" height="300" style="width:100%; height:auto; max-width:450px; margin:0 auto;"></canvas>
-            <p style="text-align: center; font-size: 0.8rem;">📈 Вклад в прибыль (тыс. ₽)</p>
+            <h3>🛠️ Мастерская «ПВО-Мастерская»</h3>
+            <p>Столярка, 3D-печать, ремонт техники. Трудоустройство ветеранов (стажировка → сдельная оплата).</p>
+            <table>
+                <tr><th>Продукт/услуга</th><th>Кол-во/год</th><th>Цена (₽)</th><th>Выручка (тыс.₽)</th></tr>
+                <tr><td>Мебель на заказ</td><td>60 шт</td><td>15 000</td><td>900</td></tr>
+                <tr><td>Сувениры для юрлиц</td><td>1000 шт</td><td>300</td><td>300</td></tr>
+                <tr><td>Ремонт техники (платный)</td><td>100 шт</td><td>2 000</td><td>200</td></tr>
+                <tr><td>Мастер-классы</td><td>100 чел</td><td>3 000</td><td>300</td></tr>
+                <tr><td><strong>Итого мастерская</strong></td><td colspan="2"></td><td><strong>1 700</strong></td></tr>
+            </table>
+            <p>Расходы (материалы, амортизация): 500 тыс.₽ → <strong>Прибыль мастерской: 1 200 тыс.₽/год</strong></p>
         </div>
     </div>
 
-    <!-- ========== 7. Полный бюджет АНО ========= -->
-    <h2>7. Полный бюджет АНО (годовой)</h2>
+    <!-- доходы и расходы с графиками -->
+    <div class="card">
+        <h3>📊 Совокупный бюджет АНО (первый год, тыс. ₽)</h3>
+        <div class="flex-stats">
+            <div class="stat-card"><div class="stat-number">5 900</div><div>Всего доходов</div></div>
+            <div class="stat-card"><div class="stat-number">6 300</div><div>Всего расходов</div></div>
+            <div class="stat-card"><div class="stat-number" style="color:#b22234;">-400</div><div>Чистый результат (дефицит)</div></div>
+        </div>
+
+        <div class="grid-2" style="margin-top: 0;">
+            <div>
+                <h4>📥 Доходы (детализация)</h4>
+                <table>
+                    <tr><th>Статья</th><th>тыс. ₽</th></tr>
+                    <tr><td>Гранты (ФПГ, регион)</td><td>2 500</td></tr>
+                    <tr><td>Пожертвования / крауд</td><td>500</td></tr>
+                    <tr><td>СМИ (субсидии, тендеры, подписка)</td><td>1 200</td></tr>
+                    <tr><td>Мастерская</td><td>1 700</td></tr>
+                    <tr><td><strong>ИТОГО ДОХОДОВ</strong></td><td><strong>5 900</strong></td></tr>
+                </table>
+            </div>
+            <div>
+                <h4>📤 Расходы (годовые)</h4>
+                <table>
+                    <tr><th>Статья</th><th>тыс. ₽</th></tr>
+                    <tr><td>ФОТ (директор, журнал, мастер, бухгалтер)</td><td>3 600</td></tr>
+                    <tr><td>Аренда + коммуналка (50-70м²)</td><td>1 200</td></tr>
+                    <tr><td>Материалы для мастерской</td><td>500</td></tr>
+                    <tr><td>ПО, хостинг, домен</td><td>100</td></tr>
+                    <tr><td>Юридическое сопровождение</td><td>300</td></tr>
+                    <tr><td>Маркетинг, мероприятия</td><td>300</td></tr>
+                    <tr><td>Прочие расходы</td><td>300</td></tr>
+                    <tr><td><strong>ИТОГО РАСХОДОВ</strong></td><td><strong>6 300</strong></td></tr>
+                </table>
+            </div>
+        </div>
+        <div style="background: #f4f9fe; padding: 1rem; border-radius: 20px; margin-top: 0.5rem;">
+            ⚠️ Дефицит первого года (400 тыс. ₽) покрывается стартовыми средствами учредителей или целевым грантом на оборудование.
+        </div>
+    </div>
+
+    <!-- ГРАФИКИ: доходы подразделений + столбцы доход/расход -->
     <div class="grid-2">
         <div class="card">
-            <strong>📥 Доходы АНО</strong><br>
-            Гранты (ФПГ, регион) – 10 000 000 ₽<br>
-            Пожертвования / краудфандинг – 2 000 000 ₽<br>
-            Коммерческая деятельность – 7 650 000 ₽<br>
-            <strong>Итого доходов: 19 650 000 ₽</strong>
+            <h3>📈 Выручка подразделений (тыс. ₽)</h3>
+            <div class="chart-container">
+                <canvas id="divisionRevenueChart" width="400" height="250" style="max-width:100%; height:auto;"></canvas>
+            </div>
+            <div style="font-size: 0.8rem; text-align: center;">СМИ: 1 960 тыс. ₽ | Мастерская: 1 700 тыс. ₽</div>
         </div>
         <div class="card">
-            <strong>📤 Расходы АНО (общие)</strong><br>
-            ФОТ (все ставки) – 10 500 000 ₽<br>
-            Аренда + коммуналка – 1 800 000 ₽<br>
-            Материалы, ПО, связь – 1 100 000 ₽<br>
-            Юридическое + бухгалтерское – 600 000 ₽<br>
-            Маркетинг / мероприятия – 500 000 ₽<br>
-            Прочие расходы – 1 000 000 ₽<br>
-            <strong>Итого расходов: 15 500 000 ₽</strong>
+            <h3>💰 Доходы vs Расходы (год)</h3>
+            <div class="chart-container">
+                <canvas id="incomeExpenseChart" width="400" height="250" style="max-width:100%; height:auto;"></canvas>
+            </div>
+            <div style="font-size: 0.8rem; text-align: center;">доходы 5 900 тыс. ₽ | расходы 6 300 тыс. ₽</div>
         </div>
     </div>
-    <div class="highlight" style="background:#e1f3e1;">
-        💎 <strong>Чистый профицит (прибыль) АНО:</strong> 19 650 000 – 15 500 000 = 4 150 000 ₽ в год → резервный фонд и развитие.
+
+    <!-- РЕНТАБЕЛЬНОСТЬ И ПОМЕСЯЧНЫЙ ГРАФИК (cash flow) -->
+    <div class="card">
+        <h3>📉 Ежемесячный денежный поток (симуляция первого года)</h3>
+        <div class="chart-container" style="height: 280px;">
+            <canvas id="monthlyCashflow"></canvas>
+        </div>
+        <p style="font-size: 0.85rem; margin-top: 1rem;">🔹 Первые месяцы дефицит за счёт стартовых вложений, к 10-12 месяцу выход в операционный ноль.<br>
+        <strong>Стартовые инвестиции:</strong> ≈550 тыс. ₽ (оборудование мастерской, регистрация, первый взнос аренды).</p>
     </div>
 
-    <!-- ========== 8. Тендеры ========= -->
-    <h2>8. Участие в тендерах (44-ФЗ, 223-ФЗ)</h2>
-    <ul>
-        <li><strong>СМИ:</strong> информационное освещение деятельности госорганов – потенциал 1–2 млн ₽/год</li>
-        <li><strong>Кибербезопасность:</strong> аудит ИБ, обучение сотрудников бюджетных учреждений – потенциал 500–800 тыс. ₽/год</li>
-        <li><strong>Мастерская:</strong> сувенирная продукция, мебель, ремонт техники для госучреждений – потенциал 300–500 тыс. ₽/год</li>
-    </ul>
-    <div class="highlight">
-        📌 Для участия в тендерах: получить КЭП, зарегистрироваться в ЕИС и на площадках (СберАСТ, РТС-тендер), подготовить портфолио.
+    <!-- Дорожная карта + Планы кибербезопасности -->
+    <div class="grid-2">
+        <div class="card">
+            <h3>🗺️ Дорожная карта (12 месяцев)</h3>
+            <div class="timeline">
+                <div class="timeline-item"><div class="month">Месяц 1-2</div><div>Регистрация АНО, подача заявки на СМИ в РКН, поиск помещения.</div></div>
+                <div class="timeline-item"><div class="month">Месяц 3</div><div>Формирование Попечительского совета, открытие счёта, закупка станков/3D-принтера.</div></div>
+                <div class="timeline-item"><div class="month">Месяц 4</div><div>Запуск мастерской (первые заказы от юрлиц), выход первого номера «Правда.Возвращение».</div></div>
+                <div class="timeline-item"><div class="month">Месяц 5-6</div><div>Ежедневные публикации, мастерская на 30% загрузки, подача гранта ФПГ.</div></div>
+                <div class="timeline-item"><div class="month">Месяц 7-9</div><div>Набор ветеранов-стажёров, мастерская на 60%, платная подписка (100 чел).</div></div>
+                <div class="timeline-item"><div class="month">Месяц 10-12</div><div>Тендеры 44-ФЗ, сотрудничество с «Боевым братством», выход на самоокупаемость.</div></div>
+            </div>
+        </div>
+        <div class="card">
+            <h3>🔮 Планы развития (этап 2: кибербезопасность)</h3>
+            <p>Начиная с 13-го месяца планируется развёртывание направления <strong>«ПВО-Кибербезопасность»</strong>:</p>
+            <ul style="margin-left: 1.2rem; margin-top: 0.5rem;">
+                <li>Мониторинг соцсетей и аудит публикаций для госорганов и НКО</li>
+                <li>Абонементное обслуживание по информационной гигиене</li>
+                <li>Обучение сотрудников киберграмотности</li>
+            </ul>
+            <p><strong>Прогноз выручки (2-й год):</strong> +1,5–2 млн ₽, что переводит проект в устойчивый профицит.</p>
+            <div style="background:#eef2fa; padding:0.7rem; border-radius: 18px; margin-top: 0.8rem;">
+                ✅ Масштабируемая модель для других регионов, франшиза мастерской, тендерный отдел.
+            </div>
+        </div>
     </div>
 
-    <!-- ========== 9. Дорожная карта ========= -->
-    <h2>9. Дорожная карта (первые 6 месяцев)</h2>
-    <div class="table-wrapper">
-        <table>
-            <thead><tr><th>Месяц</th><th>Действия</th></tr></thead>
-            <tbody>
-                <tr><td>1</td><td>Регистрация АНО + подача заявления на регистрацию СМИ в РКН, переговоры о помещении</td></tr>
-                <tr><td>2</td><td>Формирование Попечительского совета, открытие счёта, подача гранта ФПГ, найм модератора/администратора ИБ</td></tr>
-                <tr><td>3</td><td>Утверждение «Правил модерации» и «Политики информационной безопасности», договор с юристом</td></tr>
-                <tr><td>4</td><td>Заключение аренды, закупка оборудования, настройка антивирусов и системы мониторинга</td></tr>
-                <tr><td>5–6</td><td>Запуск мастерской, первый выпуск «Возвращение.Медиа», ежедневная модерация, приём ветеранов</td></tr>
-            </tbody>
-        </table>
+    <!-- Дополнительные ключевые тезисы -->
+    <div class="financial-summary">
+        <strong>📌 Ключевые тезисы для партнёров и грантодателей:</strong><br>
+        • Два устойчивых направления: СМИ + мастерская, диверсификация доходов.<br>
+        • Ясная социальная миссия: ветераны получают работу и голос в медиа.<br>
+        • Аббревиатура ПВО — патриотичный, юридически нейтральный бренд.<br>
+        • Низкий порог входа (стартовые ~550 тыс.₽), окупаемость к концу первого года.<br>
+        • Потенциал выхода на прибыль 1,5–2 млн ₽ после внедрения кибербезопасности.
     </div>
-
-    <!-- ========== 10. Итоговые тезисы ========= -->
-    <h2>10. Ключевые тезисы для инвесторов и партнёров</h2>
-    <ul>
-        <li>✅ Проект полностью самоокупаем за счёт трёх коммерческих подразделений (прибыль 7,65 млн ₽/год).</li>
-        <li>✅ СМИ и кибербезопасность включены в тендерные закупки – диверсификация доходов.</li>
-        <li>✅ Попечительский совет и модерация по 149-ФЗ обеспечивают юридическую чистоту.</li>
-        <li>✅ Модель готова к масштабированию в другие регионы.</li>
-    </ul>
 
     <footer>
-        АНО «Возвращение» — официальный сайт: <strong>https://diz-max.github.io/vozvrahenie/</strong><br>
-        Для сохранения в PDF: «Печать» → «Сохранить как PDF». Документ адаптирован под любые устройства.
+        АНО «Правда. Возвращение. Опора» — расчёты основаны на реалистичной модели загрузки мастерской и монетизации СМИ.<br>
+        © 2025 | Проект готов к регистрации в РКН и подаче грантовых заявок.
     </footer>
 </div>
 
 <script>
-    (function() {
-        // данные для графиков (тыс. ₽)
-        const incomeLabels = ['Кибербезопасность', 'СМИ', 'Мастерская'];
-        const incomeValues = [3940, 5810, 2100];
-        const profitValues = [2740, 3410, 1500];
+    // График: выручка подразделений (СМИ 1960, мастерская 1700)
+    const ctxDiv = document.getElementById('divisionRevenueChart').getContext('2d');
+    new Chart(ctxDiv, {
+        type: 'bar',
+        data: {
+            labels: ['Сетевое издание', 'Мастерская'],
+            datasets: [{
+                label: 'Выручка (тыс. ₽)',
+                data: [1960, 1700],
+                backgroundColor: ['#2c5a7a', '#4682b4'],
+                borderRadius: 8
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: { legend: { position: 'top' } }
+        }
+    });
 
-        const ctxIncome = document.getElementById('incomeChart').getContext('2d');
-        new Chart(ctxIncome, {
-            type: 'bar',
-            data: {
-                labels: incomeLabels,
-                datasets: [{
-                    label: 'Выручка (тыс. ₽)',
-                    data: incomeValues,
-                    backgroundColor: '#6b8c5c',
-                    borderRadius: 8,
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: true,
-                plugins: {
-                    legend: { position: 'top' },
-                    tooltip: { callbacks: { label: (ctx) => `${ctx.raw.toLocaleString()} тыс. ₽` } }
-                },
-                scales: {
-                    y: { beginAtZero: true, title: { display: true, text: 'тыс. рублей' } }
-                }
-            }
-        });
+    // График доходы vs расходы
+    const ctxIncExp = document.getElementById('incomeExpenseChart').getContext('2d');
+    new Chart(ctxIncExp, {
+        type: 'bar',
+        data: {
+            labels: ['Доходы', 'Расходы'],
+            datasets: [{
+                label: 'Тыс. ₽',
+                data: [5900, 6300],
+                backgroundColor: ['#2e7d64', '#bc6c25'],
+                borderRadius: 8
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: { legend: { position: 'top' } }
+        }
+    });
 
-        const ctxProfit = document.getElementById('profitChart').getContext('2d');
-        new Chart(ctxProfit, {
-            type: 'bar',
-            data: {
-                labels: incomeLabels,
-                datasets: [{
-                    label: 'Прибыль (тыс. ₽)',
-                    data: profitValues,
-                    backgroundColor: '#cfb284',
-                    borderRadius: 8,
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: true,
-                plugins: {
-                    legend: { position: 'top' },
-                    tooltip: { callbacks: { label: (ctx) => `${ctx.raw.toLocaleString()} тыс. ₽` } }
+    // Ежемесячный денежный поток (накопительно + помесячный дефицит/профицит)
+    // Модель: первые 3 месяца стартовые затраты, постепенный рост доходов.
+    // Месяц 1-2: доход ~200 тыс (стартовые вливания/грант), расход 500 тыс; мес3-4 доход 350 расход 500;
+    // мес5-6 доход 450 расход 520; мес7-9 доход 580 расход 540; мес10-12 доход 680 расход 550 (финальный месяц приближение к нулю).
+    const months = ['М1','М2','М3','М4','М5','М6','М7','М8','М9','М10','М11','М12'];
+    const revenueMonthly = [180, 220, 300, 380, 450, 520, 580, 620, 660, 720, 750, 800];  // тыс. руб в месяц (нарастающая выручка)
+    const expenseMonthly = [520, 500, 510, 510, 530, 540, 550, 560, 570, 580, 590, 600];
+    const cashFlow = revenueMonthly.map((rev, idx) => rev - expenseMonthly[idx]);
+    
+    const ctxMonthly = document.getElementById('monthlyCashflow').getContext('2d');
+    new Chart(ctxMonthly, {
+        type: 'line',
+        data: {
+            labels: months,
+            datasets: [
+                {
+                    label: 'Доходы (тыс. ₽)',
+                    data: revenueMonthly,
+                    borderColor: '#2c6e52',
+                    backgroundColor: 'rgba(44,110,82,0.05)',
+                    tension: 0.2,
+                    fill: false
                 },
-                scales: {
-                    y: { beginAtZero: true, title: { display: true, text: 'тыс. рублей' } }
+                {
+                    label: 'Расходы (тыс. ₽)',
+                    data: expenseMonthly,
+                    borderColor: '#b4652a',
+                    backgroundColor: 'rgba(180,101,42,0.05)',
+                    tension: 0.2,
+                    fill: false
+                },
+                {
+                    label: 'Чистый поток (прибыль/убыток)',
+                    data: cashFlow,
+                    borderColor: '#1e4663',
+                    borderWidth: 2,
+                    borderDash: [5, 5],
+                    tension: 0.1,
+                    fill: false,
+                    pointBackgroundColor: '#1e4663'
                 }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: {
+                tooltip: { callbacks: { label: (ctx) => `${ctx.dataset.label}: ${ctx.raw} тыс. ₽` } },
+                legend: { position: 'top' }
+            },
+            scales: {
+                y: { title: { display: true, text: 'тыс. рублей' } }
             }
-        });
-    })();
+        }
+    });
 </script>
 </body>
 </html>
