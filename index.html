@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>АНО «Правда. Возвращение. Опора» (ПВО) — проект</title>
-    <!-- Chart.js CDN for graphs -->
+    <title>Презентация проекта | АНО «Правда. Возвращение. Опора» + Фонд</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <style>
         * {
@@ -12,462 +11,378 @@
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
             font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-            background: #f0f2f5;
-            color: #1a2c3e;
+            background: #eef2f5;
             padding: 2rem 1rem;
-            line-height: 1.5;
+            scroll-behavior: smooth;
         }
-
-        .container {
-            max-width: 1300px;
+        /* контейнер слайдов */
+        .presentation {
+            max-width: 1280px;
             margin: 0 auto;
-            background: white;
-            border-radius: 32px;
-            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.15);
-            overflow: hidden;
-            padding: 2rem 1.8rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
         }
-
-        h1 {
-            font-size: 2.2rem;
+        .slide {
+            background: white;
+            border-radius: 36px;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.15);
+            padding: 2rem 2.2rem;
+            transition: all 0.2s;
+            border: 1px solid #e9edf2;
+        }
+        .slide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            border-bottom: 3px solid #b38f40;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.6rem;
+        }
+        .slide-title {
+            font-size: 1.8rem;
             font-weight: 800;
-            background: linear-gradient(135deg, #1e3c72, #2b4c7c);
+            background: linear-gradient(135deg, #1e3c72, #2d5a7e);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            letter-spacing: -0.3px;
-            margin-bottom: 0.25rem;
         }
-
-        .badge {
-            display: inline-block;
-            background: #eef2ff;
-            color: #1e3c72;
-            font-weight: 600;
-            padding: 0.25rem 0.75rem;
-            border-radius: 40px;
+        .slide-number {
             font-size: 0.8rem;
-            margin-bottom: 1rem;
+            color: #6c86a3;
+            background: #f0f2f5;
+            padding: 0.2rem 0.8rem;
+            border-radius: 40px;
         }
-
-        .sub {
-            color: #4a627a;
-            border-left: 4px solid #2b4c7c;
-            padding-left: 1rem;
-            margin: 0.75rem 0 1.5rem 0;
-            font-weight: 400;
-        }
-
         .grid-2 {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1.8rem;
-            margin: 2rem 0;
+            margin: 1rem 0;
         }
-
         .card {
-            background: #ffffff;
+            background: #fefefe;
             border-radius: 24px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
-            padding: 1.5rem;
-            border: 1px solid #e9edf2;
-            transition: all 0.2s;
+            padding: 1.2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            border: 1px solid #e9ecef;
         }
-
-        .card h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #1e4663;
+            line-height: 1;
         }
-
-        .card h4 {
-            font-weight: 600;
-            font-size: 1.2rem;
-            margin: 1rem 0 0.5rem 0;
-            color: #1e3c72;
-        }
-
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 0.9rem;
             margin: 1rem 0;
         }
-
         th, td {
+            padding: 0.5rem 0.3rem;
+            border-bottom: 1px solid #dee2e6;
             text-align: left;
-            padding: 0.6rem 0.4rem;
-            border-bottom: 1px solid #e2e8f0;
         }
-
-        th {
-            font-weight: 700;
-            background-color: #f8fafc;
+        .badge {
+            background: #eef2ff;
+            display: inline-block;
+            padding: 0.2rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
         }
-
-        .financial-summary {
-            background: #f8fafc;
-            border-radius: 24px;
-            padding: 1.5rem;
+        .quote {
+            background: #fef9e6;
+            border-left: 5px solid #b38f40;
+            padding: 1rem;
+            font-style: italic;
             margin: 1rem 0;
         }
-
-        .flex-stats {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            justify-content: space-between;
-            margin: 1.5rem 0;
-        }
-
-        .stat-card {
-            flex: 1;
-            background: white;
-            border-radius: 20px;
-            padding: 1rem;
-            text-align: center;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-            border: 1px solid #eef2f6;
-        }
-
-        .stat-number {
-            font-size: 1.9rem;
-            font-weight: 800;
-            color: #1e4663;
-        }
-
-        hr {
-            margin: 1.5rem 0;
-            border: none;
-            height: 2px;
-            background: linear-gradient(to right, #cbd5e1, transparent);
-        }
-
         .chart-container {
-            position: relative;
-            height: 280px;
-            margin: 1.5rem 0;
+            height: 250px;
+            margin: 1rem 0;
         }
-
-        .timeline {
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
-        }
-
-        .timeline-item {
-            display: flex;
-            gap: 1rem;
-            border-left: 3px solid #2b4c7c;
-            padding-left: 1rem;
-        }
-
-        .month {
-            font-weight: 800;
-            min-width: 70px;
-            color: #0f2b42;
-        }
-
         footer {
             text-align: center;
-            margin-top: 2.5rem;
-            font-size: 0.8rem;
-            color: #6c86a3;
-            border-top: 1px solid #e2edf7;
-            padding-top: 1.8rem;
+            margin-top: 1rem;
+            font-size: 0.75rem;
+            color: #5b7a9a;
         }
-
+        hr {
+            margin: 1rem 0;
+        }
         @media (max-width: 700px) {
-            .container {
-                padding: 1rem;
+            .slide {
+                padding: 1.2rem;
             }
-            .card {
-                padding: 1rem;
-            }
-            h1 {
-                font-size: 1.7rem;
+            .slide-title {
+                font-size: 1.4rem;
             }
         }
     </style>
 </head>
 <body>
-<div class="container">
-    <div class="badge">⚡ полная проектная модель | версия 2.0</div>
-    <h1>АНО «Правда. Возвращение. Опора»</h1>
-    <div class="sub">Короткое наименование: АНО «ПВО» | СМИ «Правда.Возвращение» | Мастерская «ПВО-Мастерская»</div>
-
-    <!-- краткое описание -->
-    <div class="financial-summary" style="margin-top: 0;">
-        <strong>🎯 Миссия:</strong> через честную журналистику и труд возвращать ветеранов к мирной жизни, давая им опору — информационную, социальную, профессиональную. <br>
-        <strong>⚙️ Ключевые направления:</strong> Сетевое издание + производственная мастерская. Кибербезопасность — в планах развития (2-й год).
-    </div>
-
-    <!-- 1. Управление -->
-    <div class="card">
-        <h3>🏛️ Органы управления АНО</h3>
-        <table>
-            <thead>
-                <tr><th>Орган</th><th>Состав</th><th>Ключевые полномочия</th></tr>
-            </thead>
-            <tbody>
-                <tr><td>Учредители</td><td>3 физ. лица</td><td>Утверждение устава, назначение директора</td></tr>
-                <tr><td>Директор</td><td>1 (наёмный)</td><td>Операционка, финансы, гранты, договоры</td></tr>
-                <tr><td>Попечительский совет</td><td>3–5 человек (ветераны, юристы, СМИ)</td><td>Стратегия, фандрайзинг, контроль</td></tr>
-                <tr><td>Ревизор</td><td>1 (независимый)</td><td>Проверка отчётности</td></tr>
-            </tbody>
-        </table>
-        <div style="font-size: 0.85rem; color: #3b5e7e;">Заседания поквартально, члены совета pro bono.</div>
-    </div>
-
-    <!-- 2. СМИ + Мастерская основные блоки -->
-    <div class="grid-2">
-        <div class="card">
-            <h3>📰 Сетевое издание «Правда.Возвращение»</h3>
-            <p><strong>Регистрация:</strong> РКН (Госуслуги, пошлина ~10 000₽, 15 рабочих дней)<br>
-            <strong>Тематика:</strong> соцжурналистика, адаптация ветеранов, юрсоветы, патриотика.<br>
-            <strong>Периодичность:</strong> ежедневно + еженедельный аналитический выпуск.</p>
-            <h4>📌 Монетизация СМИ (год)</h4>
-            <table>
-                <tr><th>Канал</th><th>Выручка (тыс. ₽)</th></tr>
-                <tr><td>Госсубсидии / гранты (социалка)</td><td>900</td></tr>
-                <tr><td>Тендеры по 44-ФЗ / инфосопровождение</td><td>300</td></tr>
-                <tr><td>Добровольные пожертвования</td><td>250</td></tr>
-                <tr><td>Платная подписка (100 чел × 300₽×12)</td><td>360</td></tr>
-                <tr><td>Обучение военной журналистике (поток)</td><td>150</td></tr>
-                <tr><td><strong>Итого СМИ</strong></td><td><strong>1 960</strong></td></tr>
-            </table>
-            <p><em>Прямые расходы редакции: ФОТ журналист+гл.ред, продвижение ≈ 960 тыс.₽, вклад в прибыль ~1 000 тыс.₽</em></p>
+<div class="presentation">
+    <!-- СЛАЙД 1: титул -->
+    <div class="slide">
+        <div class="slide-header">
+            <div class="slide-title">⚡ АНО «Правда. Возвращение. Опора»</div>
+            <div class="slide-number">1 / 9</div>
         </div>
+        <div style="text-align: center; margin: 2rem 0;">
+            <div class="badge">Полная презентация проекта</div>
+            <h1 style="font-size: 2.4rem; margin: 1rem 0;">ПВО — устойчивая экосистема<br>поддержки ветеранов</h1>
+            <p style="font-size: 1.1rem; color: #2c5a7a;">СМИ + Мастерская + Целевой фонд (эндаумент)</p>
+            <div style="margin-top: 2rem;">
+                <p><strong>Миссия:</strong> через честную журналистику и труд возвращать ветеранов к мирной жизни,<br>давая опору — информационную, социальную, профессиональную.</p>
+            </div>
+        </div>
+        <footer>Аббревиатура ПВО = «Правда. Возвращение. Опора» | Юридически нейтральный патриотический бренд</footer>
+    </div>
 
-        <div class="card">
-            <h3>🛠️ Мастерская «ПВО-Мастерская»</h3>
-            <p>Столярка, 3D-печать, ремонт техники. Трудоустройство ветеранов (стажировка → сдельная оплата).</p>
-            <table>
-                <tr><th>Продукт/услуга</th><th>Кол-во/год</th><th>Цена (₽)</th><th>Выручка (тыс.₽)</th></tr>
-                <tr><td>Мебель на заказ</td><td>60 шт</td><td>15 000</td><td>900</td></tr>
-                <tr><td>Сувениры для юрлиц</td><td>1000 шт</td><td>300</td><td>300</td></tr>
-                <tr><td>Ремонт техники (платный)</td><td>100 шт</td><td>2 000</td><td>200</td></tr>
-                <tr><td>Мастер-классы</td><td>100 чел</td><td>3 000</td><td>300</td></tr>
-                <tr><td><strong>Итого мастерская</strong></td><td colspan="2"></td><td><strong>1 700</strong></td></tr>
-            </table>
-            <p>Расходы (материалы, амортизация): 500 тыс.₽ → <strong>Прибыль мастерской: 1 200 тыс.₽/год</strong></p>
+    <!-- СЛАЙД 2: структура управления + юридическая чистота -->
+    <div class="slide">
+        <div class="slide-header">
+            <div class="slide-title">🏛️ Органы управления и правовая основа</div>
+            <div class="slide-number">2 / 9</div>
+        </div>
+        <div class="grid-2">
+            <div class="card">
+                <h3>АНО «Правда. Возвращение. Опора»</h3>
+                <ul style="margin-left: 1.2rem;">
+                    <li>Учредители: 3 физ. лица</li>
+                    <li>Директор (наёмный) — операционка, гранты</li>
+                    <li>Попечительский совет (3–5 чел): ветераны, юристы, медиа</li>
+                    <li>Ревизор — независимый контроль</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>🏦 Целевой фонд «Правда.Возвращение»</h3>
+                <ul style="margin-left: 1.2rem;">
+                    <li>Учредитель: АНО «ПВО»</li>
+                    <li>Управляющая компания (консервативный портфель)</li>
+                    <li>Попечительский совет фонда (5 экспертов)</li>
+                    <li>Инвестиционный доход 8–10% годовых</li>
+                </ul>
+                <div class="badge" style="margin-top: 0.5rem;">✅ Юридически безопасно: нет слов «оборона», «полицейский», «МВД»</div>
+            </div>
+        </div>
+        <div class="quote">
+            💡 Ключевое преимущество: аббревиатура ПВО вызывает уважение, но расшифровка «Правда. Возвращение. Опора» нейтральна для РКН и госорганов.
         </div>
     </div>
 
-    <!-- доходы и расходы с графиками -->
-    <div class="card">
-        <h3>📊 Совокупный бюджет АНО (первый год, тыс. ₽)</h3>
-        <div class="flex-stats">
-            <div class="stat-card"><div class="stat-number">5 900</div><div>Всего доходов</div></div>
-            <div class="stat-card"><div class="stat-number">6 300</div><div>Всего расходов</div></div>
-            <div class="stat-card"><div class="stat-number" style="color:#b22234;">-400</div><div>Чистый результат (дефицит)</div></div>
+    <!-- СЛАЙД 3: СМИ + регистрация в РКН -->
+    <div class="slide">
+        <div class="slide-header">
+            <div class="slide-title">📰 Сетевое издание «Правда.Возвращение»</div>
+            <div class="slide-number">3 / 9</div>
         </div>
-
-        <div class="grid-2" style="margin-top: 0;">
+        <div class="grid-2">
             <div>
-                <h4>📥 Доходы (детализация)</h4>
+                <p><strong>Параметры регистрации:</strong></p>
+                <ul>
+                    <li>Полное название: «Правда.Возвращение» (кратко ПВО-Медиа)</li>
+                    <li>Домен: pvo-media.ru</li>
+                    <li>Тематика: соцжурналистика, адаптация ветеранов, юрсоветы</li>
+                    <li>Периодичность: ежедневно + еженедельный аналитический дайджест</li>
+                    <li>Пошлина: 10 000 ₽, срок регистрации 15 рабочих дней</li>
+                </ul>
+                <div class="badge" style="margin-top: 0.8rem;">📌 Заявление в РКН уже подготовлено, риск отказа минимален</div>
+            </div>
+            <div class="card">
+                <h4>Монетизация СМИ (1 год)</h4>
                 <table>
-                    <tr><th>Статья</th><th>тыс. ₽</th></tr>
-                    <tr><td>Гранты (ФПГ, регион)</td><td>2 500</td></tr>
-                    <tr><td>Пожертвования / крауд</td><td>500</td></tr>
-                    <tr><td>СМИ (субсидии, тендеры, подписка)</td><td>1 200</td></tr>
+                    <tr><td>Гранты / субсидии</td><td>900 тыс. ₽</td></tr>
+                    <tr><td>Тендеры 44-ФЗ (инфосопровождение)</td><td>300 тыс. ₽</td></tr>
+                    <tr><td>Платная подписка (100 чел × 300₽)</td><td>360 тыс. ₽</td></tr>
+                    <tr><td>Обучение журналистике</td><td>150 тыс. ₽</td></tr>
+                    <tr><td><strong>Итого СМИ</strong></td><td><strong>1 960 тыс. ₽</strong></td></tr>
+                </table>
+            </div>
+        </div>
+        <p><em>Редакция: главный редактор + штатный журналист + внештатные ветераны-корреспонденты.</em></p>
+    </div>
+
+    <!-- СЛАЙД 4: Мастерская -->
+    <div class="slide">
+        <div class="slide-header">
+            <div class="slide-title">🛠️ ПВО-Мастерская — экономика и соцэффект</div>
+            <div class="slide-number">4 / 9</div>
+        </div>
+        <div class="grid-2">
+            <div>
+                <table>
+                    <tr><th>Продукт</th><th>Выручка (тыс. ₽)</th></tr>
+                    <tr><td>Мебель на заказ (60 шт)</td><td>900</td></tr>
+                    <tr><td>Сувениры для юрлиц (1000 шт)</td><td>300</td></tr>
+                    <tr><td>Ремонт техники (100 шт)</td><td>200</td></tr>
+                    <tr><td>Мастер-классы (100 чел)</td><td>300</td></tr>
+                    <tr><td><strong>Итого выручка</strong></td><td><strong>1 700</strong></td></tr>
+                </table>
+            </div>
+            <div class="card">
+                <div class="stat-number">1 200 000 ₽</div>
+                <div>прибыль мастерской в год</div>
+                <div style="margin-top: 0.5rem;">Рентабельность ≈ 70%</div>
+                <hr>
+                <div><strong>Социальная миссия:</strong> до 8 ветеранов-стажёров одновременно, стипендии из фонда — 120 тыс. ₽/год.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- СЛАЙД 5: Финансовая модель АНО + поддержка фонда -->
+    <div class="slide">
+        <div class="slide-header">
+            <div class="slide-title">💰 Бюджет АНО и роль целевого фонда</div>
+            <div class="slide-number">5 / 9</div>
+        </div>
+        <div class="grid-2">
+            <div>
+                <h3>Доходы АНО (тыс. ₽)</h3>
+                <table>
+                    <tr><td>Гранты</td><td>2 500</td></tr>
+                    <tr><td>Пожертвования</td><td>500</td></tr>
+                    <tr><td>СМИ</td><td>1 200</td></tr>
                     <tr><td>Мастерская</td><td>1 700</td></tr>
-                    <tr><td><strong>ИТОГО ДОХОДОВ</strong></td><td><strong>5 900</strong></td></tr>
+                    <tr><td><strong>Итого</strong></td><td><strong>5 900</strong></td></tr>
                 </table>
             </div>
             <div>
-                <h4>📤 Расходы (годовые)</h4>
+                <h3>Расходы АНО (тыс. ₽)</h3>
                 <table>
-                    <tr><th>Статья</th><th>тыс. ₽</th></tr>
-                    <tr><td>ФОТ (директор, журнал, мастер, бухгалтер)</td><td>3 600</td></tr>
-                    <tr><td>Аренда + коммуналка (50-70м²)</td><td>1 200</td></tr>
-                    <tr><td>Материалы для мастерской</td><td>500</td></tr>
-                    <tr><td>ПО, хостинг, домен</td><td>100</td></tr>
-                    <tr><td>Юридическое сопровождение</td><td>300</td></tr>
-                    <tr><td>Маркетинг, мероприятия</td><td>300</td></tr>
-                    <tr><td>Прочие расходы</td><td>300</td></tr>
-                    <tr><td><strong>ИТОГО РАСХОДОВ</strong></td><td><strong>6 300</strong></td></tr>
+                    <tr><td>ФОТ</td><td>3 600</td></tr>
+                    <tr><td>Аренда</td><td>1 200</td></tr>
+                    <tr><td>Материалы мастерской</td><td>500</td></tr>
+                    <tr><td>Юристы, маркетинг, прочее</td><td>1 000</td></tr>
+                    <tr><td><strong>Итого</strong></td><td><strong>6 300</strong></td></tr>
                 </table>
             </div>
         </div>
-        <div style="background: #f4f9fe; padding: 1rem; border-radius: 20px; margin-top: 0.5rem;">
-            ⚠️ Дефицит первого года (400 тыс. ₽) покрывается стартовыми средствами учредителей или целевым грантом на оборудование.
+        <div class="quote">
+            🔄 Дефицит АНО без фонда: –400 тыс. ₽ → <strong>Поддержка фонда: +600 тыс. ₽/год → Чистый профицит: +200 тыс. ₽</strong>
         </div>
     </div>
 
-    <!-- ГРАФИКИ: доходы подразделений + столбцы доход/расход -->
-    <div class="grid-2">
-        <div class="card">
-            <h3>📈 Выручка подразделений (тыс. ₽)</h3>
+    <!-- СЛАЙД 6: Целевой фонд (эндаумент) графики -->
+    <div class="slide">
+        <div class="slide-header">
+            <div class="slide-title">🏦 Фонд «Правда.Возвращение» — рост капитала</div>
+            <div class="slide-number">6 / 9</div>
+        </div>
+        <div class="grid-2">
+            <div>
+                <h3>Формирование капитала</h3>
+                <table>
+                    <tr><td>Первичные пожертвования</td><td>2 000 000 ₽</td></tr>
+                    <tr><td>Грант на эндаумент</td><td>3 000 000 ₽</td></tr>
+                    <tr><td>Краудфандинг</td><td>1 500 000 ₽</td></tr>
+                    <tr><td>Отчисления от прибыли АНО</td><td>1 500 000 ₽</td></tr>
+                    <tr><td><strong>Целевой капитал (старт)</strong></td><td><strong>8 000 000 ₽</strong></td></tr>
+                </table>
+                <div class="stat-number" style="font-size:1.2rem;">Инвестдоход ~ 640–800 тыс. ₽/год</div>
+            </div>
             <div class="chart-container">
-                <canvas id="divisionRevenueChart" width="400" height="250" style="max-width:100%; height:auto;"></canvas>
+                <canvas id="growthFundChart"></canvas>
             </div>
-            <div style="font-size: 0.8rem; text-align: center;">СМИ: 1 960 тыс. ₽ | Мастерская: 1 700 тыс. ₽</div>
         </div>
-        <div class="card">
-            <h3>💰 Доходы vs Расходы (год)</h3>
-            <div class="chart-container">
-                <canvas id="incomeExpenseChart" width="400" height="250" style="max-width:100%; height:auto;"></canvas>
-            </div>
-            <div style="font-size: 0.8rem; text-align: center;">доходы 5 900 тыс. ₽ | расходы 6 300 тыс. ₽</div>
-        </div>
+        <p>Ежегодное распределение средств фонда: 50% — покрытие дефицита АНО, 20% — стипендии ветеранам, 17% — кибербезопасность, 13% — журналистика.</p>
     </div>
 
-    <!-- РЕНТАБЕЛЬНОСТЬ И ПОМЕСЯЧНЫЙ ГРАФИК (cash flow) -->
-    <div class="card">
-        <h3>📉 Ежемесячный денежный поток (симуляция первого года)</h3>
-        <div class="chart-container" style="height: 280px;">
-            <canvas id="monthlyCashflow"></canvas>
+    <!-- СЛАЙД 7: кибербезопасность и планы 2 года -->
+    <div class="slide">
+        <div class="slide-header">
+            <div class="slide-title">🔐 Кибербезопасность — новое направление</div>
+            <div class="slide-number">7 / 9</div>
         </div>
-        <p style="font-size: 0.85rem; margin-top: 1rem;">🔹 Первые месяцы дефицит за счёт стартовых вложений, к 10-12 месяцу выход в операционный ноль.<br>
-        <strong>Стартовые инвестиции:</strong> ≈550 тыс. ₽ (оборудование мастерской, регистрация, первый взнос аренды).</p>
-    </div>
-
-    <!-- Дорожная карта + Планы кибербезопасности -->
-    <div class="grid-2">
-        <div class="card">
-            <h3>🗺️ Дорожная карта (12 месяцев)</h3>
-            <div class="timeline">
-                <div class="timeline-item"><div class="month">Месяц 1-2</div><div>Регистрация АНО, подача заявки на СМИ в РКН, поиск помещения.</div></div>
-                <div class="timeline-item"><div class="month">Месяц 3</div><div>Формирование Попечительского совета, открытие счёта, закупка станков/3D-принтера.</div></div>
-                <div class="timeline-item"><div class="month">Месяц 4</div><div>Запуск мастерской (первые заказы от юрлиц), выход первого номера «Правда.Возвращение».</div></div>
-                <div class="timeline-item"><div class="month">Месяц 5-6</div><div>Ежедневные публикации, мастерская на 30% загрузки, подача гранта ФПГ.</div></div>
-                <div class="timeline-item"><div class="month">Месяц 7-9</div><div>Набор ветеранов-стажёров, мастерская на 60%, платная подписка (100 чел).</div></div>
-                <div class="timeline-item"><div class="month">Месяц 10-12</div><div>Тендеры 44-ФЗ, сотрудничество с «Боевым братством», выход на самоокупаемость.</div></div>
+        <div class="grid-2">
+            <div>
+                <p><strong>Старт — второй год</strong> (финансирование из фонда 100 тыс. ₽ + собственные средства).</p>
+                <ul>
+                    <li>Аудит соцсетей / публикаций</li>
+                    <li>Абонементы мониторинга для НКО и госорганов</li>
+                    <li>Обучение сотрудников кибергигиене</li>
+                </ul>
+                <div class="stat-number" style="font-size: 1.3rem;">Прогноз выручки: 1,5–2 млн ₽/год</div>
+                <div>Рентабельность ≈ 68%</div>
             </div>
-        </div>
-        <div class="card">
-            <h3>🔮 Планы развития (этап 2: кибербезопасность)</h3>
-            <p>Начиная с 13-го месяца планируется развёртывание направления <strong>«ПВО-Кибербезопасность»</strong>:</p>
-            <ul style="margin-left: 1.2rem; margin-top: 0.5rem;">
-                <li>Мониторинг соцсетей и аудит публикаций для госорганов и НКО</li>
-                <li>Абонементное обслуживание по информационной гигиене</li>
-                <li>Обучение сотрудников киберграмотности</li>
-            </ul>
-            <p><strong>Прогноз выручки (2-й год):</strong> +1,5–2 млн ₽, что переводит проект в устойчивый профицит.</p>
-            <div style="background:#eef2fa; padding:0.7rem; border-radius: 18px; margin-top: 0.8rem;">
-                ✅ Масштабируемая модель для других регионов, франшиза мастерской, тендерный отдел.
+            <div class="card">
+                <h4>Преимущества запуска</h4>
+                <p>✔ Диверсификация доходов<br>✔ Синергия с СМИ (модерация, правовой мониторинг)<br>✔ Востребовано на рынке тендеров 44-ФЗ</p>
             </div>
         </div>
     </div>
 
-    <!-- Дополнительные ключевые тезисы -->
-    <div class="financial-summary">
-        <strong>📌 Ключевые тезисы для партнёров и грантодателей:</strong><br>
-        • Два устойчивых направления: СМИ + мастерская, диверсификация доходов.<br>
-        • Ясная социальная миссия: ветераны получают работу и голос в медиа.<br>
-        • Аббревиатура ПВО — патриотичный, юридически нейтральный бренд.<br>
-        • Низкий порог входа (стартовые ~550 тыс.₽), окупаемость к концу первого года.<br>
-        • Потенциал выхода на прибыль 1,5–2 млн ₽ после внедрения кибербезопасности.
+    <!-- СЛАЙД 8: дорожная карта + ключевые этапы -->
+    <div class="slide">
+        <div class="slide-header">
+            <div class="slide-title">🗓️ Дорожная карта (24 месяца)</div>
+            <div class="slide-number">8 / 9</div>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between;">
+            <div style="flex:1; min-width: 200px;"><strong>Месяц 1-3</strong><br>Регистрация АНО, заявка в РКН, аренда, закупка станков.</div>
+            <div style="flex:1; min-width: 200px;"><strong>Месяц 4-6</strong><br>Запуск мастерской, первый выпуск СМИ, краудфандинг фонда.</div>
+            <div style="flex:1; min-width: 200px;"><strong>Месяц 7-12</strong><br>Мастерская на 60% загрузки, фонд сформирован (8 млн ₽), поддержка АНО.</div>
+            <div style="flex:1; min-width: 200px;"><strong>Месяц 13-24</strong><br>Запуск кибербезопасности, выход на чистую прибыль 1,5+ млн ₽/год, масштабирование.</div>
+        </div>
+        <div class="quote" style="margin-top: 1rem;">
+            ✅ Полная окупаемость стартовых вложений (≈550 тыс. ₽) — 12–14 месяцев.
+        </div>
     </div>
 
-    <footer>
-        АНО «Правда. Возвращение. Опора» — расчёты основаны на реалистичной модели загрузки мастерской и монетизации СМИ.<br>
-        © 2025 | Проект готов к регистрации в РКН и подаче грантовых заявок.
-    </footer>
+    <!-- СЛАЙД 9: выводы, риски, итоговая оценка -->
+    <div class="slide">
+        <div class="slide-header">
+            <div class="slide-title">📌 Итоги и перспективы</div>
+            <div class="slide-number">9 / 9</div>
+        </div>
+        <div class="grid-2">
+            <div>
+                <h3>Ключевые выводы</h3>
+                <ul>
+                    <li>Устойчивая конструкция «АНО + Эндаумент» ликвидирует дефицит</li>
+                    <li>Два ядра (СМИ + мастерская) генерируют 7,65 млн ₽ выручки</li>
+                    <li>Фонд через 5 лет даёт >1 млн ₽ ежегодной поддержки</li>
+                    <li>Юридически чистая регистрация СМИ (без слова «полицейский»)</li>
+                    <li>Модель готова к масштабированию в регионы</li>
+                </ul>
+            </div>
+            <div>
+                <h3>Риски и минимизация</h3>
+                <table>
+                    <tr><td>Отказ в регистрации СМИ</td><td>🟢 Низкий (нейтральное название)</td></tr>
+                    <tr><td>Недобор грантов</td><td>🟡 Компенсация тендерами + подписка</td></tr>
+                    <tr><td>Падение доходности фонда</td><td>🟢 Консервативная стратегия УК</td></tr>
+                </table>
+            </div>
+        </div>
+        <div class="quote" style="background:#e0f2fe;">
+            🎯 Итоговая рекомендация: запуск проекта немедленный. Проект признаётся финансово состоятельным, социально значимым и самовоспроизводящимся.
+        </div>
+        <footer>© АНО «Правда. Возвращение. Опора» + Фонд целевого капитала | Демонстрационная презентация v1.0</footer>
+    </div>
 </div>
 
 <script>
-    // График: выручка подразделений (СМИ 1960, мастерская 1700)
-    const ctxDiv = document.getElementById('divisionRevenueChart').getContext('2d');
-    new Chart(ctxDiv, {
-        type: 'bar',
-        data: {
-            labels: ['Сетевое издание', 'Мастерская'],
-            datasets: [{
-                label: 'Выручка (тыс. ₽)',
-                data: [1960, 1700],
-                backgroundColor: ['#2c5a7a', '#4682b4'],
-                borderRadius: 8
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: true,
-            plugins: { legend: { position: 'top' } }
-        }
-    });
-
-    // График доходы vs расходы
-    const ctxIncExp = document.getElementById('incomeExpenseChart').getContext('2d');
-    new Chart(ctxIncExp, {
-        type: 'bar',
-        data: {
-            labels: ['Доходы', 'Расходы'],
-            datasets: [{
-                label: 'Тыс. ₽',
-                data: [5900, 6300],
-                backgroundColor: ['#2e7d64', '#bc6c25'],
-                borderRadius: 8
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: true,
-            plugins: { legend: { position: 'top' } }
-        }
-    });
-
-    // Ежемесячный денежный поток (накопительно + помесячный дефицит/профицит)
-    // Модель: первые 3 месяца стартовые затраты, постепенный рост доходов.
-    // Месяц 1-2: доход ~200 тыс (стартовые вливания/грант), расход 500 тыс; мес3-4 доход 350 расход 500;
-    // мес5-6 доход 450 расход 520; мес7-9 доход 580 расход 540; мес10-12 доход 680 расход 550 (финальный месяц приближение к нулю).
-    const months = ['М1','М2','М3','М4','М5','М6','М7','М8','М9','М10','М11','М12'];
-    const revenueMonthly = [180, 220, 300, 380, 450, 520, 580, 620, 660, 720, 750, 800];  // тыс. руб в месяц (нарастающая выручка)
-    const expenseMonthly = [520, 500, 510, 510, 530, 540, 550, 560, 570, 580, 590, 600];
-    const cashFlow = revenueMonthly.map((rev, idx) => rev - expenseMonthly[idx]);
-    
-    const ctxMonthly = document.getElementById('monthlyCashflow').getContext('2d');
-    new Chart(ctxMonthly, {
+    // график роста целевого капитала
+    const ctxGrowth = document.getElementById('growthFundChart').getContext('2d');
+    new Chart(ctxGrowth, {
         type: 'line',
         data: {
-            labels: months,
-            datasets: [
-                {
-                    label: 'Доходы (тыс. ₽)',
-                    data: revenueMonthly,
-                    borderColor: '#2c6e52',
-                    backgroundColor: 'rgba(44,110,82,0.05)',
-                    tension: 0.2,
-                    fill: false
-                },
-                {
-                    label: 'Расходы (тыс. ₽)',
-                    data: expenseMonthly,
-                    borderColor: '#b4652a',
-                    backgroundColor: 'rgba(180,101,42,0.05)',
-                    tension: 0.2,
-                    fill: false
-                },
-                {
-                    label: 'Чистый поток (прибыль/убыток)',
-                    data: cashFlow,
-                    borderColor: '#1e4663',
-                    borderWidth: 2,
-                    borderDash: [5, 5],
-                    tension: 0.1,
-                    fill: false,
-                    pointBackgroundColor: '#1e4663'
-                }
-            ]
+            labels: ['1 год', '2 год', '3 год', '4 год', '5 год'],
+            datasets: [{
+                label: 'Целевой капитал (тыс. ₽)',
+                data: [8000, 9100, 10300, 11500, 12800],
+                borderColor: '#2b5e3b',
+                backgroundColor: 'rgba(43,94,59,0.05)',
+                tension: 0.2,
+                fill: true,
+                pointBackgroundColor: '#1f4f2d'
+            }]
         },
-        options: {
-            responsive: true,
-            maintainAspectRatio: true,
-            plugins: {
-                tooltip: { callbacks: { label: (ctx) => `${ctx.dataset.label}: ${ctx.raw} тыс. ₽` } },
-                legend: { position: 'top' }
-            },
-            scales: {
-                y: { title: { display: true, text: 'тыс. рублей' } }
-            }
-        }
+        options: { responsive: true, maintainAspectRatio: true }
     });
 </script>
 </body>
